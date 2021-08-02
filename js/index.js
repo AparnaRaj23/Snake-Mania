@@ -7,10 +7,11 @@ const musicSound = new Audio('music/bg_music.mp3');
 let speed = 10;
 let score = 0;
 let lastPaintTime = 0;
-let snakeArr = [
-    {x: 13, y: 15}
-]
-food = {x: 6, y: 7};
+let a = 1; 
+let b = 18;
+let snakeArr = [{x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random())}];
+
+food = {x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random())};
 
 // Game Functions
 function main(curTime){
@@ -43,8 +44,6 @@ function gameEngine(){
         musicSound.pause();
         inputDir =  {x: 0, y: 0}; 
         alert("Game Over. Press any key to play again!");
-        let a = 1; 
-        let b = 18;
         snakeArr = [{x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random())}];
         musicSound.play();
         score = 0; 
@@ -61,9 +60,7 @@ function gameEngine(){
             highScoreBox.innerHTML = "High Score: " + highScoreVal;
         }
         scoreBox.innerHTML = "Score: " +  score;
-        snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y})
-        let a = 1; 
-        let b = 18; 
+        snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
         food = {x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random())}
     }
 
