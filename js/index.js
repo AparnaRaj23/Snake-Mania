@@ -1,10 +1,10 @@
 //Game Constants & Variables
 let inputDir = {x: 0, y: 0};
-const foodSound = new Audio();
+const foodSound = new Audio('music/food.mp3');
 const gameOverSound = new Audio('music/gameover.mp3');
 const moveSound = new Audio('music/move.mp3');
 const musicSound = new Audio('music/bg_music.mp3');
-let speed = 10;
+let speed = 6;
 let score = 0;
 let lastPaintTime = 0;
 let snakeArr = [
@@ -81,12 +81,28 @@ function gameEngine(){
         snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = e.y;
         snakeElement.style.gridColumnStart = e.x;
+
         if(index === 0){
-            snakeElement.classList.add('head');
+            if(inputDir.x === 0 && inputDir.y === -1){ // arrowUp
+                snakeElement.classList.add('head-up');
+            }
+            else if(inputDir.x === 0 && inputDir.y === 1){ // arrowDown
+                snakeElement.classList.add('head-down');
+            }
+            else if(inputDir.x === -1 && inputDir.y === 0){ // arrowLeft
+                snakeElement.classList.add('head-left');
+            }
+            else if(inputDir.x === 1 && inputDir.y === 0){   // arrowRight
+                snakeElement.classList.add('head-right');
+            }
+            else{
+                snakeElement.classList.add('head-left');
+            }
         }
         else{
-            snakeElement.classList.add('snake');
+            snakeElement.classList.add('snake-body');
         }
+
         board.appendChild(snakeElement);
     })
 
@@ -97,6 +113,9 @@ function gameEngine(){
     foodElement.classList.add('food');
     board.appendChild(foodElement);
 }
+
+
+
 
 // main logic
 let highScore = localStorage.getItem('highScore');
@@ -111,7 +130,6 @@ else{
 window.requestAnimationFrame(main);
 window.addEventListener('keydown', e =>{
     musicSound.play();
-    inputDir = {x: 0, y: 1} // Start the game
     moveSound.play();
     switch (e.key){
         case "ArrowUp":
@@ -137,4 +155,4 @@ window.addEventListener('keydown', e =>{
         default:
             break;
     }
-})
+});
