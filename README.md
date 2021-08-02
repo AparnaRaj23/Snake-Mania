@@ -6,4 +6,4 @@ Game controls: Arrow Keys.
 # Deployment
 Deployed Website: https://aparnaraj23.github.io/Snake-Mania/
 
-![](/img/screenshot.PNG)
+![](/img/screenshot.png)
